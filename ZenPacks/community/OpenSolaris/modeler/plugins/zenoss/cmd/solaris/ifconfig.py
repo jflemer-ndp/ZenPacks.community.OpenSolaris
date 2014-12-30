@@ -111,8 +111,11 @@ class ifconfig(SolarisCommandPlugin):
                 #netmask = self.maskToBits(netmask)
                 iface.setIpAddresses = ["%s/%s" % (ip, netmask)]
                 iface.macaddress=arpdict[ "%s_%s" % ( iface.interfaceName,ip ) ]
-                iface.speed=dladmdict[ iface.interfaceName][0]
-                iface.duplex=dladmdict[ iface.interfaceName][1]
+                try:
+                    iface.speed=dladmdict[ iface.interfaceName][0]
+                    iface.duplex=dladmdict[ iface.interfaceName][1]
+                except:
+                    pass
         print relMap
         return relMap
 
